@@ -1,8 +1,8 @@
-# ThinkPad Backlight
+# ThinkPad Keyboard Backlight
 
 An Omarchy bar widget for the ThinkPad keyboard backlight: click to toggle, right-click for brightness and a sundown schedule.
 
-![ThinkPad Backlight menu](preview.gif)
+![ThinkPad Keyboard Backlight menu](preview.gif)
 
 - **Click:** on or off, back at the level you last used.
 - **Right-click:** menu with three keyboard icons (dark, dim, bright) for off, low and high, and a "Turn on at sundown" switch.
@@ -22,6 +22,12 @@ An Omarchy bar widget for the ThinkPad keyboard backlight: click to toggle, righ
 
 ```
 omarchy plugin add https://github.com/remigius-labs/omarchy-thinkpad-backlight --enable
+```
+
+## Remove
+
+```
+omarchy plugin remove remi.kbdlight
 ```
 
 ## Limits

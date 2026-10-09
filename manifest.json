@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "id": "remi.kbdlight",
-  "name": "ThinkPad Backlight",
+  "name": "ThinkPad Keyboard Backlight",
   "version": "1.0.0",
   "author": "remigius-labs",
-  "description": "ThinkPad keyboard backlight in the bar: click to toggle, right-click for off/low/high and a sundown schedule that follows your timezone.",
+  "description": "Keyboard backlight control for ThinkPads: toggle, off/low/high, and a sundown schedule that follows your timezone.",
   "kinds": [
     "bar-widget"
   ],
@@ -12,8 +12,8 @@
     "barWidget": "Panel.qml"
   },
   "barWidget": {
-    "displayName": "ThinkPad Backlight",
-    "description": "Keyboard backlight toggle with a sundown schedule",
+    "displayName": "ThinkPad Keyboard Backlight",
+    "description": "Keyboard backlight toggle with brightness levels and a sundown schedule",
     "category": "System",
     "defaultSection": "right",
     "allowMultiple": false
