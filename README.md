@@ -1,8 +1,8 @@
-# ThinkPad Keyboard Backlight
+# ThinkPad Sunset Backlight
 
-An Omarchy bar widget for the ThinkPad keyboard backlight: click to toggle, right-click for brightness and a sundown schedule.
+An Omarchy bar widget that turns your ThinkPad keyboard backlight on at the real sunset and off at sunrise, for your timezone. Click to toggle, right-click for brightness and times.
 
-![ThinkPad Keyboard Backlight menu](preview.gif)
+![ThinkPad Sunset Backlight menu](preview.gif)
 
 - **Click:** on or off, back at the level you last used.
 - **Right-click:** menu with three keyboard icons (dark, dim, bright) for off, low and high, and a "Turn on at sundown" switch.
@@ -21,7 +21,7 @@ An Omarchy bar widget for the ThinkPad keyboard backlight: click to toggle, righ
 ## Install
 
 ```
-omarchy plugin add https://github.com/remigius-labs/omarchy-thinkpad-backlight --enable
+omarchy plugin add https://github.com/remigius-labs/omarchy-thinkpad-sunset-backlight --enable
 ```
 
 ## Remove

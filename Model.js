@@ -1,4 +1,4 @@
-// ThinkPad Keyboard Backlight: sun math, no Quickshell imports.
+// ThinkPad Sunset Backlight: sun math, no Quickshell imports.
 
 var RAD = Math.PI / 180
 
