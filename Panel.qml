@@ -117,6 +117,9 @@ Panel {
     return true
   }
 
+  // Optional label for the location row; defaults to the timezone's city.
+  readonly property string placeName: String(setting("placeName", "")) || zone.split("/").pop().replace(/_/g, " ")
+
   readonly property bool automatic: onTime === "" && offTime === ""
 
   function resetAutomatic() {
@@ -339,7 +342,7 @@ Panel {
         Text {
           Layout.fillWidth: true
           Layout.leftMargin: Style.space(10) - Style.spacing.sm
-          text: root.zone.split("/").pop().replace(/_/g, " ")
+          text: root.placeName
           color: Color.foreground
           font.family: root.bar ? root.bar.fontFamily : Style.font.family
           font.pixelSize: Style.font.body
