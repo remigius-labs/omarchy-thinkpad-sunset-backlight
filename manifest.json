@@ -4,7 +4,7 @@
   "name": "ThinkPad Sunset Backlight",
   "version": "1.0.0",
   "author": "remigius-labs",
-  "description": "Keyboard backlight that follows the real sunset and sunrise for your timezone. Toggle, off/low/high, or set your own times.",
+  "description": "Automatic ThinkPad keyboard backlight: on at the real sunset, off at sunrise, for your timezone. Toggle, off/low/high brightness, or set your own times.",
   "kinds": [
     "bar-widget"
   ],
