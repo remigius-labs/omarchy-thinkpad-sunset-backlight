@@ -108,13 +108,26 @@ Panel {
     save({ sunsetMode: on })
   }
 
-  // A typed time overrides the sun for that side; clearing it goes back.
-  function setTime(key, text) {
-    if (text.trim() !== "" && Model.parseClock(text) < 0) return false
+  // A set time overrides the sun for that side; Automatic goes back.
+  // Steps start from the shown time (the sun's when no time is set)
+  // and snap to the quarter hour.
+  function stepTime(key, side, delta) {
+    var cur = Model.parseClock(root[key])
+    if (cur < 0) {
+      if (!plan) return
+      var d = new Date(side === "on" ? plan.nextOn : plan.nextOff)
+      cur = d.getHours() * 60 + d.getMinutes()
+    }
+    var next = (Math.round(cur / 15) * 15 + delta + 1440) % 1440
+    if (next === cur) next = (next + delta + 1440) % 1440
     var patch = {}
-    patch[key] = text.trim()
+    patch[key] = Model.clock24(next)
     save(patch)
-    return true
+  }
+
+  function timeText(key, side) {
+    var min = Model.parseClock(root[key])
+    return min < 0 ? sunText(side) : Model.clock12(Model.atMinutes(new Date(), min))
   }
 
   // Optional label for the location row; defaults to the timezone's city.
@@ -309,21 +322,25 @@ Panel {
             font.family: root.bar ? root.bar.fontFamily : Style.font.family
             font.pixelSize: Style.font.body
           }
-          // Empty field shows the sun time as placeholder; typing a time
-          // overrides it, clearing the field goes back to the sun.
-          // Typing breaks the text binding, so push saved changes (like
-          // the Automatic button clearing it) back into the field.
-          readonly property string saved: root[modelData.key]
-          onSavedChanged: timeField.text = saved
-
-          TextField {
-            id: timeField
-            Layout.preferredWidth: Style.space(100)
-            text: root[modelData.key]
-            placeholderText: root.sunText(modelData.side)
-            foreground: Color.foreground
+          // Shows the sun time until a step sets a time of its own.
+          Button {
+            text: "−"
+            fontFamily: root.bar ? root.bar.fontFamily : Style.font.family
+            onClicked: root.stepTime(modelData.key, modelData.side, -15)
+          }
+          Text {
+            Layout.preferredWidth: Style.space(70)
+            horizontalAlignment: Text.AlignHCenter
+            text: root.timeText(modelData.key, modelData.side)
+            color: Color.foreground
+            opacity: root[modelData.key] === "" ? 0.6 : 1.0
             font.family: root.bar ? root.bar.fontFamily : Style.font.family
-            onEditingFinished: if (!root.setTime(modelData.key, text)) text = root[modelData.key]
+            font.pixelSize: Style.font.body
+          }
+          Button {
+            text: "+"
+            fontFamily: root.bar ? root.bar.fontFamily : Style.font.family
+            onClicked: root.stepTime(modelData.key, modelData.side, 15)
           }
         }
       }

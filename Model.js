@@ -62,6 +62,12 @@ function clock12(ms) {
   return (h % 12 || 12) + ":" + (mi < 10 ? "0" : "") + mi + (h < 12 ? " AM" : " PM")
 }
 
+// minutes after midnight → "19:05"
+function clock24(min) {
+  var h = Math.floor(min / 60), mi = min % 60
+  return (h < 10 ? "0" : "") + h + ":" + (mi < 10 ? "0" : "") + mi
+}
+
 function atMinutes(day, minutes) {
   return new Date(day.getFullYear(), day.getMonth(), day.getDate(), 0, minutes).getTime()
 }
