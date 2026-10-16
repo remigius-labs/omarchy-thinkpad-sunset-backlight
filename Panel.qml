@@ -323,24 +323,44 @@ Panel {
             font.pixelSize: Style.font.body
           }
           // Shows the sun time until a step sets a time of its own.
-          Button {
-            text: "−"
-            fontFamily: root.bar ? root.bar.fontFamily : Style.font.family
-            onClicked: root.stepTime(modelData.key, modelData.side, -15)
-          }
-          Text {
-            Layout.preferredWidth: Style.space(70)
-            horizontalAlignment: Text.AlignHCenter
-            text: root.timeText(modelData.key, modelData.side)
-            color: Color.foreground
-            opacity: root[modelData.key] === "" ? 0.6 : 1.0
-            font.family: root.bar ? root.bar.fontFamily : Style.font.family
-            font.pixelSize: Style.font.body
-          }
-          Button {
-            text: "+"
-            fontFamily: root.bar ? root.bar.fontFamily : Style.font.family
-            onClicked: root.stepTime(modelData.key, modelData.side, 15)
+          RowLayout {
+            spacing: 0
+            Button {
+              id: minus
+              Layout.preferredWidth: implicitHeight * 0.8
+              horizontalPadding: 0
+              iconText: "󰍴"
+              tooltipText: "15 min earlier"
+              onClicked: root.stepTime(modelData.key, modelData.side, -15)
+            }
+            // Sized to the widest time so stepping never moves the buttons.
+            TextMetrics {
+              id: widest
+              text: "12:00 PM"
+              font.family: root.bar ? root.bar.fontFamily : Style.font.family
+              font.pixelSize: Style.font.body
+            }
+            Text {
+              Layout.preferredWidth: Math.ceil(widest.width)
+              horizontalAlignment: Text.AlignHCenter
+              text: root.timeText(modelData.key, modelData.side)
+              color: Color.foreground
+              opacity: root[modelData.key] === "" ? 0.6 : 1.0
+              font.family: root.bar ? root.bar.fontFamily : Style.font.family
+              font.pixelSize: Style.font.body
+              WheelHandler {
+                onWheel: function(e) {
+                  root.stepTime(modelData.key, modelData.side, e.angleDelta.y > 0 ? 15 : -15)
+                }
+              }
+            }
+            Button {
+              Layout.preferredWidth: minus.implicitHeight * 0.8
+              horizontalPadding: 0
+              iconText: "󰐕"
+              tooltipText: "15 min later"
+              onClicked: root.stepTime(modelData.key, modelData.side, 15)
+            }
           }
         }
       }
